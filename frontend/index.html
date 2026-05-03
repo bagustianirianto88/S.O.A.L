@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S.O.A.L – Sistem Otomatisasi Asesmen & Latihan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar card">
+        <h1>S.O.A.L</h1>
+        <p class="muted">Sistem Otomatisasi Asesmen & Latihan</p>
+        <nav>
+          <button class="nav-btn active" data-page="dashboard">Dashboard</button>
+          <button class="nav-btn" data-page="generator">Generator Soal</button>
+          <button class="nav-btn" data-page="hasil">Hasil</button>
+          <button class="nav-btn" data-page="preview">Preview Dokumen</button>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section id="dashboard" class="page active card">
+          <h2>Dashboard</h2>
+          <div class="stats-grid" id="statsGrid"></div>
+          <p class="muted">Gunakan menu Generator Soal untuk membuat butir asesmen berbasis AI.</p>
+        </section>
+
+        <section id="generator" class="page card">
+          <h2>Generator Soal AI</h2>
+          <form id="generatorForm" class="form-grid">
+            <label>Jenjang
+              <select name="jenjang" required>
+                <option value="">Pilih jenjang</option>
+                <option>SD</option><option>SMP</option><option>SMA</option>
+              </select>
+            </label>
+
+            <label>Mata Pelajaran
+              <select name="mapel" required>
+                <option value="">Pilih mapel</option>
+                <option>Matematika</option><option>Bahasa Indonesia</option><option>Bahasa Inggris</option>
+                <option>IPA</option><option>IPS</option><option>PPKn</option><option>Informatika</option>
+                <option>Sejarah</option><option>Geografi</option><option>Ekonomi</option><option>Biologi</option>
+                <option>Fisika</option><option>Kimia</option>
+              </select>
+            </label>
+
+            <label>Kurikulum
+              <select name="kurikulum" required>
+                <option value="">Pilih kurikulum</option>
+                <option value="Kurikulum Merdeka">Kurikulum Merdeka (CP)</option>
+                <option value="Kurikulum 2013">Kurikulum 2013 (KI/KD)</option>
+              </select>
+            </label>
+
+            <label>Jenis Asesmen
+              <select name="asesmen" required>
+                <option value="">Pilih jenis asesmen</option>
+                <option>Ulangan Harian</option><option>TKA</option><option>Literasi</option><option>Numerasi</option>
+              </select>
+            </label>
+
+            <label>Level Bloom
+              <select name="bloom" required>
+                <option value="">Pilih level</option>
+                <option value="C1">C1 – Mengingat</option>
+                <option value="C2">C2 – Memahami</option>
+                <option value="C3">C3 – Menerapkan</option>
+                <option value="C4">C4 – Menganalisis</option>
+                <option value="C5">C5 – Mengevaluasi</option>
+                <option value="C6">C6 – Mencipta</option>
+              </select>
+            </label>
+
+            <label>Jumlah Soal
+              <input name="jumlah" type="number" min="1" max="50" value="10" required />
+            </label>
+
+            <div class="actions">
+              <button type="submit" class="btn primary">Generate Soal</button>
+              <button type="button" id="btnRegenerate" class="btn">Regenerate</button>
+              <button type="button" id="btnRandom" class="btn">Randomisasi</button>
+            </div>
+          </form>
+          <div id="loading" class="loading hidden"><div class="spinner"></div>AI sedang memproses soal...</div>
+        </section>
+
+        <section id="hasil" class="page card">
+          <h2>Hasil Soal</h2>
+          <div id="resultList"></div>
+        </section>
+
+        <section id="preview" class="page card">
+          <h2>Preview Dokumen</h2>
+          <div class="actions">
+            <button class="btn" data-doc="soal">Kertas Soal</button>
+            <button class="btn" data-doc="kunci">Kunci Jawaban</button>
+            <button class="btn" data-doc="kisi">Kisi-Kisi</button>
+            <button class="btn" data-doc="kartu">Kartu Soal</button>
+            <button class="btn primary" id="btnPrint">Cetak / Simpan PDF</button>
+          </div>
+          <article id="docPreview" class="doc-preview"></article>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js" type="module"></script>
+  </body>
+</html>
