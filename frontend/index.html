@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="app-shell">
-      <aside class="sidebar card">
+      <aside class="sidebar card glass">
         <h1>S.O.A.L</h1>
         <p class="muted">Sistem Otomatisasi Asesmen & Latihan</p>
         <nav>
@@ -23,87 +23,34 @@
       </aside>
 
       <main class="content">
-        <section id="dashboard" class="page active card">
-          <div class="card settings-card">
-            <h3>Konfigurasi Backend</h3>
-            <p class="muted">Untuk GitHub Pages, isi URL backend serverless (contoh: https://nama-app.vercel.app).</p>
-            <div class="actions">
-              <input id="apiBaseInput" type="url" placeholder="https://your-backend.vercel.app" />
-              <button class="btn" id="saveApiBase">Simpan URL API</button>
-            </div>
+        <section id="dashboard" class="page active card glass">
+          <h2>Dashboard Konfigurasi</h2>
+          <p class="muted">Atur endpoint Vercel pribadi dan API key OpenAI pribadi (opsional, model BYOK).</p>
+          <div class="settings-grid">
+            <label>URL Backend Vercel
+              <input id="apiBaseInput" type="url" placeholder="https://nama-app.vercel.app" />
+            </label>
+            <label>OpenAI API Key Pribadi (Opsional)
+              <input id="openAiKeyInput" type="password" placeholder="sk-..." autocomplete="off" />
+            </label>
           </div>
-
-          <h2>Dashboard</h2>
+          <div class="actions">
+            <button class="btn" id="saveConfigBtn">Simpan Konfigurasi</button>
+            <button class="btn" id="clearConfigBtn">Reset Konfigurasi</button>
+            <button class="btn primary" id="testConnectionBtn">Tes Koneksi</button>
+          </div>
+          <div id="configInfo" class="muted"></div>
           <div class="stats-grid" id="statsGrid"></div>
-          <p class="muted">Gunakan menu Generator Soal untuk membuat butir asesmen berbasis AI.</p>
         </section>
 
-        <section id="generator" class="page card">
+        <section id="generator" class="page card glass">
           <h2>Generator Soal AI</h2>
-          <form id="generatorForm" class="form-grid">
-            <label>Jenjang
-              <select name="jenjang" required>
-                <option value="">Pilih jenjang</option>
-                <option>SD</option><option>SMP</option><option>SMA</option>
-              </select>
-            </label>
-
-            <label>Mata Pelajaran
-              <select name="mapel" required>
-                <option value="">Pilih mapel</option>
-                <option>Matematika</option><option>Bahasa Indonesia</option><option>Bahasa Inggris</option>
-                <option>IPA</option><option>IPS</option><option>PPKn</option><option>Informatika</option>
-                <option>Sejarah</option><option>Geografi</option><option>Ekonomi</option><option>Biologi</option>
-                <option>Fisika</option><option>Kimia</option>
-              </select>
-            </label>
-
-            <label>Kurikulum
-              <select name="kurikulum" required>
-                <option value="">Pilih kurikulum</option>
-                <option value="Kurikulum Merdeka">Kurikulum Merdeka (CP)</option>
-                <option value="Kurikulum 2013">Kurikulum 2013 (KI/KD)</option>
-              </select>
-            </label>
-
-            <label>Jenis Asesmen
-              <select name="asesmen" required>
-                <option value="">Pilih jenis asesmen</option>
-                <option>Ulangan Harian</option><option>TKA</option><option>Literasi</option><option>Numerasi</option>
-              </select>
-            </label>
-
-            <label>Level Bloom
-              <select name="bloom" required>
-                <option value="">Pilih level</option>
-                <option value="C1">C1 – Mengingat</option>
-                <option value="C2">C2 – Memahami</option>
-                <option value="C3">C3 – Menerapkan</option>
-                <option value="C4">C4 – Menganalisis</option>
-                <option value="C5">C5 – Mengevaluasi</option>
-                <option value="C6">C6 – Mencipta</option>
-              </select>
-            </label>
-
-            <label>Jumlah Soal
-              <input name="jumlah" type="number" min="1" max="50" value="10" required />
-            </label>
-
-            <div class="actions">
-              <button type="submit" class="btn primary">Generate Soal</button>
-              <button type="button" id="btnRegenerate" class="btn">Regenerate</button>
-              <button type="button" id="btnRandom" class="btn">Randomisasi</button>
-            </div>
-          </form>
+          <form id="generatorForm" class="form-grid"></form>
           <div id="loading" class="loading hidden"><div class="spinner"></div>AI sedang memproses soal...</div>
         </section>
 
-        <section id="hasil" class="page card">
-          <h2>Hasil Soal</h2>
-          <div id="resultList"></div>
-        </section>
-
-        <section id="preview" class="page card">
+        <section id="hasil" class="page card glass"><h2>Hasil Soal</h2><div id="resultList"></div></section>
+        <section id="preview" class="page card glass">
           <h2>Preview Dokumen</h2>
           <div class="actions">
             <button class="btn" data-doc="soal">Kertas Soal</button>
@@ -116,7 +63,6 @@
         </section>
       </main>
     </div>
-
     <script src="./script.js" type="module"></script>
   </body>
 </html>
