@@ -10,57 +10,34 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div class="bg-orb orb-1"></div><div class="bg-orb orb-2"></div>
     <div class="app-shell">
-      <aside class="sidebar card glass">
+      <aside class="sidebar panel">
         <h1>S.O.A.L</h1>
-        <p class="muted">Sistem Otomatisasi Asesmen & Latihan</p>
+        <p class="muted">AI Assessment Studio</p>
         <nav>
           <button class="nav-btn active" data-page="dashboard">Dashboard</button>
           <button class="nav-btn" data-page="generator">Generator Soal</button>
           <button class="nav-btn" data-page="hasil">Hasil</button>
-          <button class="nav-btn" data-page="preview">Preview Dokumen</button>
+          <button class="nav-btn" data-page="preview">Preview</button>
         </nav>
       </aside>
-
       <main class="content">
-        <section id="dashboard" class="page active card glass">
-          <h2>Dashboard Konfigurasi</h2>
-          <p class="muted">Atur endpoint Vercel pribadi dan API key OpenAI pribadi (opsional, model BYOK).</p>
+        <section id="dashboard" class="page active panel">
+          <h2>Konfigurasi Integrasi</h2>
+          <p class="muted">Atur endpoint Vercel dan OpenAI key pribadi Anda.</p>
           <div class="settings-grid">
-            <label>URL Backend Vercel
-              <input id="apiBaseInput" type="url" placeholder="https://nama-app.vercel.app" />
-            </label>
-            <label>OpenAI API Key Pribadi (Opsional)
-              <input id="openAiKeyInput" type="password" placeholder="sk-..." autocomplete="off" />
-            </label>
+            <label>URL Backend Vercel<input id="apiBaseInput" type="url" placeholder="https://nama-app.vercel.app" /></label>
+            <label>OpenAI API Key (Opsional)<input id="openAiKeyInput" type="password" placeholder="sk-..." autocomplete="off" /></label>
           </div>
-          <div class="actions">
-            <button class="btn" id="saveConfigBtn">Simpan Konfigurasi</button>
-            <button class="btn" id="clearConfigBtn">Reset Konfigurasi</button>
-            <button class="btn primary" id="testConnectionBtn">Tes Koneksi</button>
-          </div>
+          <div class="actions"><button class="btn" id="saveConfigBtn">Simpan</button><button class="btn" id="clearConfigBtn">Reset</button><button class="btn primary" id="testConnectionBtn">Tes Koneksi</button></div>
           <div id="configInfo" class="muted"></div>
           <div class="stats-grid" id="statsGrid"></div>
         </section>
 
-        <section id="generator" class="page card glass">
-          <h2>Generator Soal AI</h2>
-          <form id="generatorForm" class="form-grid"></form>
-          <div id="loading" class="loading hidden"><div class="spinner"></div>AI sedang memproses soal...</div>
-        </section>
-
-        <section id="hasil" class="page card glass"><h2>Hasil Soal</h2><div id="resultList"></div></section>
-        <section id="preview" class="page card glass">
-          <h2>Preview Dokumen</h2>
-          <div class="actions">
-            <button class="btn" data-doc="soal">Kertas Soal</button>
-            <button class="btn" data-doc="kunci">Kunci Jawaban</button>
-            <button class="btn" data-doc="kisi">Kisi-Kisi</button>
-            <button class="btn" data-doc="kartu">Kartu Soal</button>
-            <button class="btn primary" id="btnPrint">Cetak / Simpan PDF</button>
-          </div>
-          <article id="docPreview" class="doc-preview"></article>
-        </section>
+        <section id="generator" class="page panel"><h2>Generator Soal AI</h2><form id="generatorForm" class="form-grid"></form><div id="loading" class="loading hidden"><div class="spinner"></div>AI sedang memproses...</div></section>
+        <section id="hasil" class="page panel"><h2>Hasil Soal</h2><div id="resultList"></div></section>
+        <section id="preview" class="page panel"><h2>Preview Dokumen</h2><div class="actions"><button class="btn" data-doc="soal">Kertas Soal</button><button class="btn" data-doc="kunci">Kunci Jawaban</button><button class="btn" data-doc="kisi">Kisi-Kisi</button><button class="btn" data-doc="kartu">Kartu Soal</button><button class="btn primary" id="btnPrint">Cetak/PDF</button></div><article id="docPreview" class="doc-preview"></article></section>
       </main>
     </div>
     <script src="./script.js" type="module"></script>
