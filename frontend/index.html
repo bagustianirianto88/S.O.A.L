@@ -24,6 +24,15 @@
 
       <main class="content">
         <section id="dashboard" class="page active card">
+          <div class="card settings-card">
+            <h3>Konfigurasi Backend</h3>
+            <p class="muted">Untuk GitHub Pages, isi URL backend serverless (contoh: https://nama-app.vercel.app).</p>
+            <div class="actions">
+              <input id="apiBaseInput" type="url" placeholder="https://your-backend.vercel.app" />
+              <button class="btn" id="saveApiBase">Simpan URL API</button>
+            </div>
+          </div>
+
           <h2>Dashboard</h2>
           <div class="stats-grid" id="statsGrid"></div>
           <p class="muted">Gunakan menu Generator Soal untuk membuat butir asesmen berbasis AI.</p>

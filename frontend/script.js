@@ -2,9 +2,16 @@ const state = {
   config: null,
   soal: JSON.parse(localStorage.getItem('soal_ai') || '[]'),
   docType: 'soal',
+  apiBase: localStorage.getItem('soal_api_base') || '',
 };
 
 const el = (s) => document.querySelector(s);
+
+function getApiUrl() {
+  const trimmed = state.apiBase.trim();
+  if (!trimmed) return '/api/generate';
+  return `${trimmed.replace(/\/$/, '')}/api/generate`;
+}
 const els = (s) => [...document.querySelectorAll(s)];
 
 function buildPrompt(data) {
@@ -65,7 +72,7 @@ function persistAndRender() {
 async function generateSoal(data) {
   el('#loading').classList.remove('hidden');
   try {
-    const res = await fetch('/api/generate', {
+    const res = await fetch(getApiUrl(), {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ data, prompt: buildPrompt(data) }),
     });
@@ -99,3 +106,15 @@ els('[data-doc]').forEach((b) => b.addEventListener('click', () => { state.docTy
 el('#btnPrint').addEventListener('click', () => window.print());
 
 persistAndRender();
+
+
+const apiBaseInput = el('#apiBaseInput');
+if (apiBaseInput) {
+  apiBaseInput.value = state.apiBase;
+  el('#saveApiBase').addEventListener('click', () => {
+    const val = apiBaseInput.value.trim();
+    state.apiBase = val;
+    localStorage.setItem('soal_api_base', val);
+    alert('URL backend berhasil disimpan.');
+  });
+}
